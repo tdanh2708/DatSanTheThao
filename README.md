@@ -254,7 +254,6 @@ Một số nguồn đã tham khảo:
 - [The Lam Sport Center](https://www.thelamsportcenter.com/), [PickleballVN](https://pickleballvn.news/san-pickleball-tp-hcm/), [Sân Pick](https://sanpick.com/san-pickleball-tphcm/).
 - [Liên đoàn Bóng bàn TP. Hồ Chí Minh](https://www.bongbantphcm.vn/clb-hoi-vien), [Decathlon](https://www.decathlon.vn/blog/san-bong-ban/).
 
-Danh sách nguồn và ghi chú chi tiết trước đây được hợp nhất từ `DATA_SOURCES.md`. Nguồn được kiểm tra trong tháng 09/2026; thông tin trên website bên ngoài có thể thay đổi.
 
 ## Lưu ý
 
