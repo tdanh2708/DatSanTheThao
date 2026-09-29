@@ -1,0 +1,9 @@
+<?php
+require __DIR__.'/config/database.php';
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    verify_csrf();
+    $name=trim((string)($_POST['full_name']??''));$email=strtolower(trim((string)($_POST['email']??'')));$pass=(string)($_POST['password']??'');
+    if(mb_strlen($name)<2||!filter_var($email,FILTER_VALIDATE_EMAIL)||strlen($pass)<12){$error='Nhập tên hợp lệ, email hợp lệ và mật khẩu ít nhất 12 ký tự.';}
+    else{$st=$pdo->prepare("SELECT id FROM users WHERE role='admin' LIMIT 1");$st->execute();if($st->fetch()){$error='Đã có tài khoản admin; trình tạo đã bị khóa.';}else{$st=$pdo->prepare("INSERT INTO users(full_name,email,password,role) VALUES(?,?,?,'admin')");$st->execute([$name,$email,password_hash($pass,PASSWORD_DEFAULT)]);$done=true;}}
+}
+?><!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Tạo admin ban đầu</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><body class="bg-light"><main class="container py-5" style="max-width:600px"><div class="card card-body"><h1 class="h3">Tạo admin đầu tiên</h1><p>Chỉ hoạt động khi chưa có admin. Sau khi tạo, hãy xóa file setup_admin.php khỏi thư mục web.</p><?php if(!empty($done)): ?><div class="alert alert-success">Đã tạo admin. Hãy đăng nhập rồi xóa file này.</div><?php else: ?><?php if(!empty($error)): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?><form method="post"><?= csrf_field() ?><label class="form-label">Họ tên</label><input class="form-control mb-2" name="full_name" required><label class="form-label">Email</label><input class="form-control mb-2" name="email" type="email" required><label class="form-label">Mật khẩu (từ 12 ký tự)</label><input class="form-control mb-3" name="password" type="password" minlength="12" required><button class="btn btn-success">Tạo tài khoản admin</button></form><?php endif; ?></div></main></body></html>

@@ -1,0 +1,21 @@
+# Local connection and payment recipient settings
+/config/database.php
+/config/payment.php
+
+# User-uploaded content; retain the upload protection rules
+/uploads/chat/*
+!/uploads/chat/.htaccess
+/uploads/courts/*
+
+# Local secrets, editor files, and temporary exports
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.bak
+*.old
+~$*
+*.zip
+Thumbs.db
+.DS_Store
